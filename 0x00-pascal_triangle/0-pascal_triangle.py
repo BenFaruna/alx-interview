@@ -3,6 +3,7 @@
 Pascal Triangle using python
 """
 
+
 def find_factorial(i):
     """function to find factorial"""
     if i == 1 or i == 0:
@@ -10,9 +11,11 @@ def find_factorial(i):
     else:
         return i * find_factorial(i - 1)
 
+
 def factorial_formula(n, k):
     """function of combination formula"""
     return int(find_factorial(n) / (find_factorial(n - k) * find_factorial(k)))
+
 
 def pascal_triangle(num):
     """return the pascal triangle for a given range num"""
@@ -24,4 +27,3 @@ def pascal_triangle(num):
         triangle.append(row)
 
     return triangle
-
