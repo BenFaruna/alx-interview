@@ -3,38 +3,18 @@
 
 
 def minOperations(n):
-    """takes the number of characters needed and returns minimum operation"""
-    import sys
-	
-	# Storing the minimum operations
-	# to obtain all numbers up to N
-    dp = [sys.maxsize] * (n + 1)
-	
-	# Initial state
-    dp[1] = 0
-	
-	# Iterate for the remaining numbers
-    for i in range(2, n + 1):
-		
-		# If the number can be obtained
-		# by multiplication by 2
-        if i % 2 == 0:
-            x = dp[i // 2]
-            if x + 1 < dp[i]:
-                dp[i] = x + 1
-		
-		# If the number can be obtained
-		# by multiplication by 3
-        if i % 3 == 0:
-            x = dp[i // 3]
-            if x + 1 < dp[i]:
-                dp[i] = x + 1
-				
-		# Obtaining the number by adding 1
-        x = dp[i - 1]
-        if x + 1 < dp[i]:
-            dp[i] = x + 1
-			
-	# Return the minimum operations
-	# to obtain n
-    return dp[n]
+    """
+    Calculates the minimum number of operations to go from one 'H' to n 'H's
+    if the only available operations are "Copy All" and "Paste"
+    """
+
+    # If n is 1, 0 operations are needed.
+    if n <= 1:
+        return 0
+
+    # Find smallest prime factors
+    for i in range(2, int((n/2)+1)):
+        if n % i == 0:
+            return minOperations(int(n / i)) + i
+
+    return n
