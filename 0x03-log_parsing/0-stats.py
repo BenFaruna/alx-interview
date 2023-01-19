@@ -2,6 +2,7 @@
 import sys
 """module reads stdin and computes metric"""
 
+
 def print_stats(size: int, status_code: dict) -> None:
     """prints file and count of all status codes"""
     print("File size: {}".format(file_size))
