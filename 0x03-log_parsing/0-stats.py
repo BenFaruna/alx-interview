@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import sys
 """module reads stdin and computes metric"""
+import sys
 
 
 def print_stats(size: int, status_code: dict) -> None:
