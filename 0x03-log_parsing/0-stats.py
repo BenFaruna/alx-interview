@@ -7,7 +7,8 @@ def print_stats(size: int, status_code: dict) -> None:
     """prints file and count of all status codes"""
     print("File size: {}".format(file_size))
     for code, count in status_code.items():
-        print("{}: {}".format(code, count))
+        if count > 0:
+            print("{}: {}".format(code, count))
 
 
 count = 0
