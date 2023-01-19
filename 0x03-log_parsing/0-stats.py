@@ -1,20 +1,18 @@
 #!/usr/bin/python3
-"""module reads stdin and computes metric"""
+""" Log parsing """
 import sys
 
 
-def print_stats(size: int, status_code: dict) -> None:
-    """prints file and count of all status codes"""
-    print("File size: {}".format(file_size))
+def print_stats(total_size, status_codes):
+    """ Helper function. Print right format """
     codes = ["200", "301", "400",  "401", "403", "404", "405", "500"]
+    print("File size: {}".format(total_size))
     for code in codes:
-        if status_code[code] != 0:
-            print("{}: {}".format(code, status_code[code]))
+        if status_codes[code] != 0:
+            print("{}: {}".format(code, status_codes[code]))
 
 
-count = 0
-file_size = 0
-status_code = {
+codes_count = {
     "200": 0,
     "301": 0,
     "400": 0,
@@ -24,22 +22,23 @@ status_code = {
     "405": 0,
     "500": 0
 }
+total_size = 0
+line_num = 0
 
 try:
     for line in sys.stdin:
-        line_n = line.split()
-        if len(line_n) == 9:
-            count += 1
-            file_size = file_size + int(line_n[-1])
-            code = line_n[-2]
-
-            if code in status_code:
-                status_code[code] += 1
-        else:
+        words = line.split()
+        if (len(words) < 2):
             continue
+        line_num += 1
+        total_size += int(words[-1])
+        if words[-2] in codes_count:
+            codes_count[words[-2]] += 1
 
-        if count % 10 == 0:
-            print_stats(file_size, status_code)
+        if (line_num % 10 == 0):
+            print_stats(total_size, codes_count)
 except KeyboardInterrupt:
-    print_stats(file_size, status_code)
+    print_stats(total_size, codes_count)
     raise
+
+print_stats(total_size, codes_count)
