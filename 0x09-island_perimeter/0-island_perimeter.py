@@ -1,26 +1,22 @@
 #!/usr/bin/python3
-"""module to check island perimeter"""
-
-def check(grid, x, y):
-    """checks the surrounding area and returns perimeter per block"""
-    b_perimeter = 0
-    if grid[y][x] == 1:
-        if grid[y][x + 1] == 0:
-            b_perimeter += 1
-        if grid[y][x - 1] == 0:
-            b_perimeter += 1
-        if grid[y + 1][x] == 0:
-            b_perimeter += 1
-        if grid[y - 1][x] == 0:
-            b_perimeter += 1
-    return b_perimeter
+""" 0x1C. Island Perimeter """
 
 
 def island_perimeter(grid):
-    """calculates the perimeter of the grid occupied by 1s"""
-    perimeter = 0
+    """ 0x1C. Island Perimeter """
 
-    for y in range(len(grid)):
-        for x in range(len(grid[y])):
-            perimeter += check(grid, x, y)
+    perimeter = 0
+    for row_index, row in enumerate(grid):
+        for col_index, elem in enumerate(row):
+            if elem == 1:
+                if row_index == 0 or grid[row_index - 1][col_index] == 0:
+                    perimeter += 1
+                if row_index == len(grid) - 1 or \
+                        grid[row_index + 1][col_index] == 0:
+                    perimeter += 1
+                if col_index == 0 or grid[row_index][col_index - 1] == 0:
+                    perimeter += 1
+                if col_index == len(grid[row_index]) - 1 or \
+                        grid[row_index][col_index + 1] == 0:
+                    perimeter += 1
     return perimeter
